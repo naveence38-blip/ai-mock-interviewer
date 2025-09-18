@@ -6,7 +6,10 @@
   "scripts": {
     "start": "node server.js"
   },
+<<<<<<< HEAD
   "engines": { "node": "18.x" },
+=======
+>>>>>>> d0203385e9aac40736b1b1a54c340605efdd45e7
   "dependencies": {
     "express": "^4.19.2",
     "body-parser": "^1.20.2",
