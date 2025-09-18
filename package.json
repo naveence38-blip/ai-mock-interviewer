@@ -2,18 +2,13 @@
   "name": "ai-mock-interviewer",
   "version": "1.0.0",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
-<<<<<<< HEAD
-  "engines": { "node": "18.x" },
-=======
->>>>>>> d0203385e9aac40736b1b1a54c340605efdd45e7
   "dependencies": {
-    "express": "^4.19.2",
-    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "openai": "^4.0.0"
   }
 }
