@@ -1,74 +1,45 @@
 import express from "express";
-import bodyParser from "body-parser";
 import cors from "cors";
-import fs from "fs";
+import dotenv from "dotenv";
 import OpenAI from "openai";
 
+dotenv.config();
+
 const app = express();
-const PORT = 3000;
+app.use(express.json());
+app.use(cors({ origin: process.env.FRONTEND_ORIGIN || "*" }));
 
-app.use(cors());
-app.use(bodyParser.json());
-
-// Load question bank
-const questions = JSON.parse(fs.readFileSync("questions.json", "utf-8"));
-
-// OpenAI client
 const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Endpoint: Get random question
-<<<<<<< HEAD
-
-=======
->>>>>>> d0203385e9aac40736b1b1a54c340605efdd45e7
-app.get("/api/question", (req, res) => {
-  const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-  res.json(randomQuestion);
-});
-<<<<<<< HEAD
-app.get("/api/health", (req, res) => res.json({ status: "ok" }));
-
-app.get("/api/question", (req, res) => {
-  const q = questions[Math.floor(Math.random() * questions.length)];
-  res.json(q);
+// Health check
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok" });
 });
 
-app.post("/api/evaluate", async (req, res) => {
-  // your evaluation logic here
-});
-=======
->>>>>>> d0203385e9aac40736b1b1a54c340605efdd45e7
-
-// Endpoint: Evaluate answer
-app.post("/api/evaluate", async (req, res) => {
-  const { question, studentAnswer, expected_points } = req.body;
-
+// Ask endpoint
+app.post("/api/ask", async (req, res) => {
   try {
-    const prompt = `
-You are an examiner. Question: "${question}".
-Expected key points: ${expected_points.join(", ")}.
-Student's answer: "${studentAnswer}".
+    const { question, answer } = req.body;
 
-Evaluate if the student covered the key points. Give constructive feedback. Keep it short and professional.
-    `;
-
-    const response = await client.chat.completions.create({
+    const completion = await client.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }]
+      messages: [
+        { role: "system", content: "You are a marine engineering oral examiner." },
+        { role: "user", content: Question: ${question}\nStudent Answer: ${answer}\nEvaluate and give feedback. }
+      ],
     });
 
-    res.json({ feedback: response.choices[0].message.content });
+    res.json({ reply: completion.choices[0].message.content });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: "Something went wrong" });
   }
 });
 
+// Use Render’s assigned port
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
-
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
