@@ -65,12 +65,10 @@ Evaluate if the student covered the key points. Give constructive feedback. Keep
   }
 });
 
-<<<<<<< HEAD
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
-=======
+
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
->>>>>>> d0203385e9aac40736b1b1a54c340605efdd45e7
