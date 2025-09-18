@@ -1,0 +1,27 @@
+[
+  {
+    "question": "What is the purpose of a vacuum breaker in OWS?",
+    "expected_points": [
+      "prevents siphoning",
+      "avoids vacuum formation",
+      "prevents oil leakage to sea"
+    ]
+  },
+  {
+    "question": "Explain the process of crankshaft heat treatment.",
+    "expected_points": [
+      "annealing",
+      "normalizing",
+      "nitriding",
+      "hardening"
+    ]
+  },
+  {
+    "question": "What is the difference between ship trial and shop trial?",
+    "expected_points": [
+      "location",
+      "purpose",
+      "engine performance check"
+    ]
+  }
+]
